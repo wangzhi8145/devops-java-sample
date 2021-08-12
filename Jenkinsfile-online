@@ -17,7 +17,6 @@ pipeline {
         DOCKERHUB_NAMESPACE = '18600091848'
         GITHUB_ACCOUNT = '447359470@qq.com'
         APP_NAME = 'devops-java-sample'
-        SONAR_CREDENTIAL_ID = 'sonar-qube'
     }
 
     stages {
@@ -79,7 +78,6 @@ pipeline {
               container ('maven') {
                 input(id: 'release-image-with-tag', message: 'release image with tag?')
                   withCredentials([usernamePassword(credentialsId: "$GITHUB_CREDENTIAL_ID", passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh 'git config --global http.sslVerify false'
                     sh 'git config --global user.email "kubesphere@yunify.com" '
                     sh 'git config --global user.name "kubesphere" '
                     sh 'git tag -a $TAG_NAME -m "$TAG_NAME" '
